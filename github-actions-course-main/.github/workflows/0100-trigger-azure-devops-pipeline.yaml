@@ -1,0 +1,19 @@
+name: 0100-trigger-azure-devops-pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Azure Pipelines Action
+      uses: Azure/pipelines@v1
+      with:
+        azure-devops-project-url: 'https://dev.azure.com/houssemdellai/triggered-by-github-actions'
+        azure-pipeline-name: 'triggered-by-github-actions' # name of the Azure pipeline to be triggered
+        azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+        azure-pipeline-variables:  '{"variable1": "value1-gh", "variable2": "value2-gh"}' # optional stringified json
